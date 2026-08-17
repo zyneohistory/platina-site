@@ -1,0 +1,5 @@
+import { redirect } from "next/navigation";
+
+export default function HomePage() {
+  redirect("/jogos/god-of-war-2018");
+}
