@@ -32,6 +32,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# .env.production only has NEXT_PUBLIC_* values (Supabase URL + publishable key,
+# both meant to be public and protected by RLS) — committed so Vercel's git
+# build has them without a separate dashboard step.
+!.env.production
 
 # vercel
 .vercel
