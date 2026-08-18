@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { TrophyIcon } from "@/components/trophy-icon";
 import { ShieldIcon, ControllerIcon, BarChartIcon } from "@/components/landing-icons";
-import { StartTransitionButton } from "@/components/start-transition-button";
 
 const FEATURES = [
   {
@@ -59,12 +58,12 @@ export default function LandingPage() {
           Cadastre seus jogos, marque o progresso de cada conquista e
           acompanhe estatísticas do seu desempenho gamer.
         </p>
-        <StartTransitionButton
+        <Link
           href="/signup"
-          className="mt-8 rounded-lg bg-gradient-to-r from-violet-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110 active:scale-95"
+          className="mt-8 rounded-lg bg-gradient-to-r from-violet-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
         >
           Começar agora
-        </StartTransitionButton>
+        </Link>
       </section>
 
       <section className="mx-auto grid max-w-5xl grid-cols-1 gap-4 px-4 pb-20 sm:grid-cols-3 sm:px-6">
