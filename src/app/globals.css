@@ -81,3 +81,57 @@ body::before {
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
+
+@keyframes orb-float-a {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, 6%) scale(1.08);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes orb-float-b {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-5%, -4%) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes orb-float-c {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.orb-a {
+  animation: orb-float-a 16s ease-in-out infinite;
+}
+.orb-b {
+  animation: orb-float-b 20s ease-in-out infinite;
+}
+.orb-c {
+  animation: orb-float-c 24s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb-a,
+  .orb-b,
+  .orb-c {
+    animation: none;
+  }
+}

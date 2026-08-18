@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TrophyIcon } from "@/components/trophy-icon";
 import { ShieldIcon, ControllerIcon, BarChartIcon } from "@/components/landing-icons";
+import { StartTransitionButton } from "@/components/start-transition-button";
 
 const FEATURES = [
   {
@@ -22,7 +23,13 @@ const FEATURES = [
 
 export default function LandingPage() {
   return (
-    <main className="min-h-dvh">
+    <main className="relative min-h-dvh overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="orb-a absolute -top-40 -left-32 h-[520px] w-[520px] rounded-full bg-violet-500/25 blur-[110px]" />
+        <div className="orb-b absolute top-1/3 -right-40 h-[480px] w-[480px] rounded-full bg-blue-500/20 blur-[110px]" />
+        <div className="orb-c absolute top-1/2 left-1/2 h-[420px] w-[420px] rounded-full bg-violet-400/10 blur-[100px]" />
+      </div>
+
       <header className="mx-auto flex max-w-5xl items-center justify-between px-4 py-6 sm:px-6">
         <div className="flex items-center gap-2">
           <TrophyIcon color="#8b5cf6" filled className="h-6 w-6" />
@@ -52,19 +59,19 @@ export default function LandingPage() {
           Cadastre seus jogos, marque o progresso de cada conquista e
           acompanhe estatísticas do seu desempenho gamer.
         </p>
-        <Link
+        <StartTransitionButton
           href="/signup"
-          className="mt-8 rounded-lg bg-gradient-to-r from-violet-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
+          className="mt-8 rounded-lg bg-gradient-to-r from-violet-500 to-blue-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110 active:scale-95"
         >
           Começar agora
-        </Link>
+        </StartTransitionButton>
       </section>
 
       <section className="mx-auto grid max-w-5xl grid-cols-1 gap-4 px-4 pb-20 sm:grid-cols-3 sm:px-6">
         {FEATURES.map((f) => (
           <div
             key={f.title}
-            className="rounded-xl border border-border bg-surface p-6"
+            className="rounded-xl border border-border bg-surface/80 p-6 backdrop-blur-sm"
           >
             <div className="mb-3">{f.icon}</div>
             <h3 className="font-semibold">{f.title}</h3>
