@@ -424,6 +424,7 @@ export type Database = {
           id: string
           is_secret: boolean
           name: string
+          rarity_percent: number | null
           sort_order: number
         }
         Insert: {
@@ -435,6 +436,7 @@ export type Database = {
           id?: string
           is_secret?: boolean
           name: string
+          rarity_percent?: number | null
           sort_order?: number
         }
         Update: {
@@ -446,6 +448,7 @@ export type Database = {
           id?: string
           is_secret?: boolean
           name?: string
+          rarity_percent?: number | null
           sort_order?: number
         }
         Relationships: [

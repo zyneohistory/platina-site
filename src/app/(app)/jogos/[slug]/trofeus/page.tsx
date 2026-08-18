@@ -23,7 +23,7 @@ export default async function TrophiesPage({
   const [{ data: trophies }, { data: progressRows }] = await Promise.all([
     supabase
       .from("trophies")
-      .select("id, name, description, grade, sort_order, is_secret")
+      .select("id, name, description, grade, sort_order, is_secret, rarity_percent")
       .eq("game_id", game!.id)
       .order("sort_order"),
     supabase
@@ -52,6 +52,7 @@ export default async function TrophiesPage({
     grade: t.grade as TrophyGradeKey,
     isSecret: t.is_secret,
     earned: earnedMap.get(t.id) ?? false,
+    rarityPercent: t.rarity_percent,
   }));
 
   return <TrophyList trophies={list} gameSlug={slug} />;

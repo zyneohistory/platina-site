@@ -11,6 +11,7 @@ type Trophy = {
   grade: TrophyGradeKey;
   isSecret: boolean;
   earned: boolean;
+  rarityPercent: number | null;
 };
 
 type Filter = "all" | "earned" | "missing";
@@ -85,6 +86,7 @@ export function TrophyList({
               isSecret={trophy.isSecret}
               earned={trophy.earned}
               gameSlug={gameSlug}
+              rarityPercent={trophy.rarityPercent}
             />
           ))}
         </ul>

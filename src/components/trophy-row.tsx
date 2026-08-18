@@ -2,7 +2,7 @@
 
 import { useTransition } from "react";
 import { toggleTrophy } from "@/lib/actions/trophies";
-import { TROPHY_GRADES, type TrophyGradeKey } from "@/lib/grades";
+import { TROPHY_GRADES, rarityTier, type TrophyGradeKey } from "@/lib/grades";
 import { TrophyIcon } from "@/components/trophy-icon";
 
 export function TrophyRow({
@@ -13,6 +13,7 @@ export function TrophyRow({
   isSecret,
   earned,
   gameSlug,
+  rarityPercent,
 }: {
   id: string;
   name: string;
@@ -21,9 +22,11 @@ export function TrophyRow({
   isSecret: boolean;
   earned: boolean;
   gameSlug: string;
+  rarityPercent: number | null;
 }) {
   const [isPending, startTransition] = useTransition();
   const style = TROPHY_GRADES[grade] ?? TROPHY_GRADES.bronze;
+  const rarity = rarityPercent !== null ? rarityTier(rarityPercent) : null;
 
   return (
     <li className="flex items-start gap-4 rounded-xl border border-border bg-surface p-4">
@@ -90,6 +93,16 @@ export function TrophyRow({
           )}
         </div>
         <p className="mt-1 text-sm text-muted">{description}</p>
+        {rarity && rarityPercent !== null && (
+          <p className="mt-1.5 flex items-center gap-1.5 text-xs">
+            <span style={{ color: rarity.color }} className="font-medium">
+              {rarity.label}
+            </span>
+            <span className="text-muted">
+              · {rarityPercent.toFixed(1)}% dos jogadores conquistaram
+            </span>
+          </p>
+        )}
       </div>
     </li>
   );
