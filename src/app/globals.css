@@ -9,16 +9,16 @@
   --foreground: #e8dfd0;
   --muted: #9c8f7c;
 
-  --gold: #b5432c;
-  --gold-soft: #6e2a1c;
-  --teal: #4fada3;
+  --gold: #8b5cf6;
+  --gold-soft: #4c3d8c;
+  --teal: #3b82f6;
 
   --bronze: #cd7f5a;
   --silver: #b6c0c9;
   --gold-grade: #e8c468;
   --platinum: #d7e3ec;
 
-  --status-completed: #4fada3;
+  --status-completed: #3b82f6;
   --status-missing: #574d3f;
   --status-unconfirmed: #d99a3d;
 }
@@ -52,8 +52,8 @@
 
 body {
   background:
-    radial-gradient(ellipse 90% 55% at 50% -12%, rgba(181, 67, 44, 0.14), transparent),
-    radial-gradient(ellipse 60% 40% at 95% 8%, rgba(79, 173, 163, 0.05), transparent),
+    radial-gradient(ellipse 90% 55% at 50% -12%, rgba(139, 92, 246, 0.14), transparent),
+    radial-gradient(ellipse 60% 40% at 95% 8%, rgba(59, 130, 246, 0.06), transparent),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
