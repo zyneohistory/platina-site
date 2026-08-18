@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { TrophyRow } from "@/components/trophy-row";
+import { TrophyList } from "@/components/trophy-list";
 import type { TrophyGradeKey } from "@/lib/grades";
 
 export default async function TrophiesPage({
@@ -45,20 +45,14 @@ export default async function TrophiesPage({
     );
   }
 
-  return (
-    <ul className="space-y-3">
-      {trophies.map((trophy) => (
-        <TrophyRow
-          key={trophy.id}
-          id={trophy.id}
-          name={trophy.name}
-          description={trophy.description}
-          grade={trophy.grade as TrophyGradeKey}
-          isSecret={trophy.is_secret}
-          earned={earnedMap.get(trophy.id) ?? false}
-          gameSlug={slug}
-        />
-      ))}
-    </ul>
-  );
+  const list = trophies.map((t) => ({
+    id: t.id,
+    name: t.name,
+    description: t.description,
+    grade: t.grade as TrophyGradeKey,
+    isSecret: t.is_secret,
+    earned: earnedMap.get(t.id) ?? false,
+  }));
+
+  return <TrophyList trophies={list} gameSlug={slug} />;
 }
