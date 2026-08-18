@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { MapPin } from "@/components/map-pin";
 import { COLLECTIBLE_STATUS, type CollectibleStatusKey } from "@/lib/grades";
 
@@ -16,11 +17,15 @@ export type MapPinData = {
 
 export function InteractiveMap({
   imageUrl,
+  imageWidth,
+  imageHeight,
   regionName,
   pins,
   gameSlug,
 }: {
   imageUrl: string;
+  imageWidth: number;
+  imageHeight: number;
   regionName: string;
   pins: MapPinData[];
   gameSlug: string;
@@ -96,32 +101,81 @@ export function InteractiveMap({
       )}
 
       <div className="relative overflow-hidden rounded-xl border border-border bg-surface">
-        <div className="relative w-full">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageUrl}
-            alt={`Mapa de ${regionName}`}
-            className="block w-full select-none"
-            draggable={false}
-          />
-          {visiblePins.map((pin) => (
-            <MapPin
-              key={pin.id}
-              collectibleId={pin.id}
-              gameSlug={gameSlug}
-              name={pin.name}
-              typeName={pin.typeName}
-              typeSlug={pin.typeSlug}
-              x={pin.x}
-              y={pin.y}
-              status={pin.status}
-            />
-          ))}
-        </div>
+        <TransformWrapper
+          minScale={1}
+          maxScale={6}
+          initialScale={1}
+          centerOnInit
+          doubleClick={{ mode: "toggle" }}
+          wheel={{ step: 0.2 }}
+        >
+          {({ zoomIn, zoomOut, resetTransform }) => (
+            <>
+              <div className="absolute top-3 right-3 z-20 flex flex-col gap-1">
+                <button
+                  type="button"
+                  onClick={() => zoomIn(0.5)}
+                  aria-label="Aumentar zoom"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface/90 text-lg leading-none text-foreground backdrop-blur-sm transition hover:border-gold hover:text-gold"
+                >
+                  +
+                </button>
+                <button
+                  type="button"
+                  onClick={() => zoomOut()}
+                  aria-label="Diminuir zoom"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface/90 text-lg leading-none text-foreground backdrop-blur-sm transition hover:border-gold hover:text-gold"
+                >
+                  −
+                </button>
+                <button
+                  type="button"
+                  onClick={() => resetTransform()}
+                  aria-label="Restaurar zoom"
+                  className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-surface/90 text-xs leading-none text-foreground backdrop-blur-sm transition hover:border-gold hover:text-gold"
+                >
+                  ⤢
+                </button>
+              </div>
+              <TransformComponent
+                wrapperStyle={{
+                  width: "100%",
+                  aspectRatio: `${imageWidth} / ${imageHeight}`,
+                }}
+                contentStyle={{ width: "100%", height: "100%" }}
+              >
+                <div className="relative h-full w-full">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={imageUrl}
+                    alt={`Mapa de ${regionName}`}
+                    className="block h-full w-full select-none"
+                    draggable={false}
+                  />
+                  {visiblePins.map((pin) => (
+                    <MapPin
+                      key={pin.id}
+                      collectibleId={pin.id}
+                      gameSlug={gameSlug}
+                      name={pin.name}
+                      typeName={pin.typeName}
+                      typeSlug={pin.typeSlug}
+                      x={pin.x}
+                      y={pin.y}
+                      status={pin.status}
+                    />
+                  ))}
+                </div>
+              </TransformComponent>
+            </>
+          )}
+        </TransformWrapper>
       </div>
 
       <p className="text-center text-xs text-muted">
-        Clique num pino pra alternar entre faltando → incerto → confirmado.
+        Role a roda do mouse ou belisque a tela pra dar zoom, arraste pra
+        mover. Clique num pino pra alternar entre faltando → incerto →
+        confirmado.
       </p>
     </div>
   );

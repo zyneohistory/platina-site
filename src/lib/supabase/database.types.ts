@@ -347,7 +347,9 @@ export type Database = {
           created_at: string
           game_id: string
           id: string
+          map_image_height: number | null
           map_image_url: string | null
+          map_image_width: number | null
           name: string
           parent_region_id: string | null
           sort_order: number
@@ -356,7 +358,9 @@ export type Database = {
           created_at?: string
           game_id: string
           id?: string
+          map_image_height?: number | null
           map_image_url?: string | null
+          map_image_width?: number | null
           name: string
           parent_region_id?: string | null
           sort_order?: number
@@ -365,7 +369,9 @@ export type Database = {
           created_at?: string
           game_id?: string
           id?: string
+          map_image_height?: number | null
           map_image_url?: string | null
+          map_image_width?: number | null
           name?: string
           parent_region_id?: string | null
           sort_order?: number

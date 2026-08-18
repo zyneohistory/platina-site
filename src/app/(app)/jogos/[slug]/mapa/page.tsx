@@ -18,7 +18,7 @@ export default async function MapPage({
 
   const { data: mapRegion } = await supabase
     .from("regions")
-    .select("id, name, map_image_url")
+    .select("id, name, map_image_url, map_image_width, map_image_height")
     .eq("game_id", game!.id)
     .not("map_image_url", "is", null)
     .maybeSingle();
@@ -82,6 +82,8 @@ export default async function MapPage({
   return (
     <InteractiveMap
       imageUrl={mapRegion.map_image_url!}
+      imageWidth={mapRegion.map_image_width ?? 1600}
+      imageHeight={mapRegion.map_image_height ?? 900}
       regionName={mapRegion.name}
       pins={pins}
       gameSlug={slug}
