@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { cycleCollectibleStatus } from "@/lib/actions/collectibles";
-import { RavenIcon } from "@/components/raven-icon";
+import { CollectibleIcon } from "@/components/collectible-icon";
 import {
   COLLECTIBLE_STATUS,
   NEXT_COLLECTIBLE_STATUS,
@@ -14,6 +14,7 @@ export function MapPin({
   gameSlug,
   name,
   typeName,
+  typeSlug,
   x,
   y,
   status,
@@ -22,6 +23,7 @@ export function MapPin({
   gameSlug: string;
   name: string;
   typeName: string;
+  typeSlug: string;
   x: number;
   y: number;
   status: CollectibleStatusKey;
@@ -61,7 +63,8 @@ export function MapPin({
           boxShadow: `0 0 8px ${style.color}aa`,
         }}
       >
-        <RavenIcon
+        <CollectibleIcon
+          typeSlug={typeSlug}
           color={style.color}
           filled={status === "completed"}
           className="h-4 w-4"

@@ -53,7 +53,7 @@ export default async function MapPage({
         .from("collectible_progress")
         .select("collectible_id, status")
         .eq("user_id", user!.id),
-      supabase.from("collectible_types").select("id, name"),
+      supabase.from("collectible_types").select("id, name, slug"),
     ]);
 
   const statusMap = new Map<string, CollectibleStatusKey>(
@@ -62,16 +62,22 @@ export default async function MapPage({
       p.status as CollectibleStatusKey,
     ]),
   );
-  const typeById = new Map((typesData ?? []).map((t) => [t.id, t.name]));
+  const typeById = new Map(
+    (typesData ?? []).map((t) => [t.id, { name: t.name, slug: t.slug }]),
+  );
 
-  const pins: MapPinData[] = (collectiblesData ?? []).map((c) => ({
-    id: c.id,
-    name: c.name,
-    typeName: typeById.get(c.collectible_type_id) ?? "Coletável",
-    x: Number(c.coord_x),
-    y: Number(c.coord_y),
-    status: statusMap.get(c.id) ?? "missing",
-  }));
+  const pins: MapPinData[] = (collectiblesData ?? []).map((c) => {
+    const type = typeById.get(c.collectible_type_id);
+    return {
+      id: c.id,
+      name: c.name,
+      typeName: type?.name ?? "Coletável",
+      typeSlug: type?.slug ?? "artifacts",
+      x: Number(c.coord_x),
+      y: Number(c.coord_y),
+      status: statusMap.get(c.id) ?? "missing",
+    };
+  });
 
   return (
     <InteractiveMap
