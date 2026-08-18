@@ -33,16 +33,25 @@ export async function updateSession(request: NextRequest) {
 
   const isPublicPath = PUBLIC_PATHS.includes(request.nextUrl.pathname);
 
-  if (!user && !isPublicPath) {
+  // Redirects must carry over any session cookies that getUser() just
+  // refreshed on `response` — otherwise a rotated refresh token gets
+  // dropped and the next request logs the user out.
+  function redirectTo(pathname: string) {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
+    url.pathname = pathname;
+    const redirectResponse = NextResponse.redirect(url);
+    response.cookies.getAll().forEach((cookie) => {
+      redirectResponse.cookies.set(cookie);
+    });
+    return redirectResponse;
+  }
+
+  if (!user && !isPublicPath) {
+    return redirectTo("/login");
   }
 
   if (user && isPublicPath) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/jogos/god-of-war-2018";
-    return NextResponse.redirect(url);
+    return redirectTo("/jogos/god-of-war-2018");
   }
 
   return response;
