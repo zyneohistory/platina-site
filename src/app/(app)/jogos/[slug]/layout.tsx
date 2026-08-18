@@ -43,12 +43,12 @@ export default async function GameLayout({
               className="h-20 w-20 rounded-lg object-cover ring-1 ring-border"
             />
           ) : (
-            <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-surface-2 text-2xl font-bold text-gold ring-1 ring-border">
+            <div className="font-display flex h-20 w-20 items-center justify-center rounded-lg bg-surface-2 text-2xl font-bold text-gold ring-1 ring-border">
               {game.title.charAt(0)}
             </div>
           )}
           <div>
-            <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+            <h1 className="font-display text-xl font-semibold tracking-wide sm:text-2xl">
               {game.title}
             </h1>
             <p className="text-sm text-muted">

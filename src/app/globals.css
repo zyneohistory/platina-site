@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #090b0e;
-  --surface: #12161c;
-  --surface-2: #1a2029;
-  --border: #262e3a;
-  --border-soft: #1c222b;
-  --foreground: #e9e6df;
-  --muted: #8b93a1;
+  --background: #0a0908;
+  --surface: #16130f;
+  --surface-2: #201b15;
+  --border: #332a20;
+  --border-soft: #211c16;
+  --foreground: #e8dfd0;
+  --muted: #9c8f7c;
 
-  --gold: #d4af37;
-  --gold-soft: #7d6a2c;
-  --teal: #3fb8af;
+  --gold: #b5432c;
+  --gold-soft: #6e2a1c;
+  --teal: #4fada3;
 
   --bronze: #cd7f5a;
   --silver: #b6c0c9;
   --gold-grade: #e8c468;
   --platinum: #d7e3ec;
 
-  --status-completed: #34d399;
-  --status-missing: #4b5563;
-  --status-unconfirmed: #f2b84b;
+  --status-completed: #4fada3;
+  --status-missing: #574d3f;
+  --status-unconfirmed: #d99a3d;
 }
 
 @theme inline {
@@ -47,21 +47,34 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-cinzel);
 }
 
 body {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(212, 175, 55, 0.08), transparent),
-    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(63, 184, 175, 0.06), transparent),
+    radial-gradient(ellipse 90% 55% at 50% -12%, rgba(181, 67, 44, 0.14), transparent),
+    radial-gradient(ellipse 60% 40% at 95% 8%, rgba(79, 173, 163, 0.05), transparent),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   min-height: 100dvh;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/></svg>");
 }
 
 ::selection {
   background: var(--gold);
-  color: #090b0e;
+  color: #0a0908;
 }
 
 .scrollbar-thin {
