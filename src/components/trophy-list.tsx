@@ -74,7 +74,7 @@ export function TrophyList({
           Nenhum troféu encontrado com esse filtro.
         </p>
       ) : (
-        <ul className="space-y-3">
+        <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           {filtered.map((trophy) => (
             <TrophyRow
               key={trophy.id}

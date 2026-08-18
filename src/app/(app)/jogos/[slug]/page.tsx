@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { ProgressBar } from "@/components/progress-bar";
+import { TrophyIcon } from "@/components/trophy-icon";
 import { TROPHY_GRADES } from "@/lib/grades";
 
 export default async function GameOverviewPage({
@@ -69,18 +70,21 @@ export default async function GameOverviewPage({
       <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {grades.map((g) => {
           const style = TROPHY_GRADES[g.key];
+          const complete = g.total > 0 && g.earned === g.total;
           return (
             <div
               key={g.key}
               className="rounded-xl border border-border bg-surface p-4 text-center"
             >
               <div
-                className="mx-auto mb-2 h-8 w-8 rounded-full"
+                className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-lg"
                 style={{
-                  background: style.color,
-                  boxShadow: `0 0 16px ${style.color}55`,
+                  background: complete ? `${style.color}1f` : "var(--surface-2)",
+                  boxShadow: complete ? `0 0 16px ${style.color}55` : "none",
                 }}
-              />
+              >
+                <TrophyIcon color={style.color} filled={complete} className="h-6 w-6" />
+              </div>
               <p className="text-lg font-semibold">
                 {g.earned}/{g.total}
               </p>

@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { cycleCollectibleStatus } from "@/lib/actions/collectibles";
+import { RavenIcon } from "@/components/raven-icon";
 import {
   COLLECTIBLE_STATUS,
   NEXT_COLLECTIBLE_STATUS,
@@ -54,13 +55,18 @@ export function MapPin({
           )
         }
         aria-label={`${name} — ${style.label}`}
-        className="block h-5 w-5 rounded-full border-2 transition hover:scale-125 disabled:opacity-50"
+        className="flex h-7 w-7 items-center justify-center rounded-full border-2 bg-surface/90 backdrop-blur-sm transition hover:scale-125 disabled:opacity-50"
         style={{
-          background: style.color,
-          borderColor: "var(--surface)",
+          borderColor: style.color,
           boxShadow: `0 0 8px ${style.color}aa`,
         }}
-      />
+      >
+        <RavenIcon
+          color={style.color}
+          filled={status === "completed"}
+          className="h-4 w-4"
+        />
+      </button>
     </div>
   );
 }
